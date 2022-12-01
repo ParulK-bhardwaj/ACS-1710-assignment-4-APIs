@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="weather-form">
+    
+    <h1>Weather in {{city1_info.city}} and {{city2_info.city}}</h1>
+    <p>{{date_now}}</p>
+
+    <p>   
+        {% if city1_info.temp > city2_info.temp %}
+            It is {{(city1_info.temp - city2_info.temp)|round(2)}} {{units_letter}} WARMER in {{city1_info.city}} than in {{city2_info.city}} today.
+        {% else %}
+            It is {{(city2_info.temp - city1_info.temp)|round(2)}} {{units_letter}} COLDER in {{city1_info.city}} than in {{city2_info.city}} today.
+        {% endif %} 
+    </p>
+
+    <p>   
+        {% if city1_info.humidity > city2_info.humidity %}
+            The humidity in {{city1_info.city}} is {{(city1_info.humidity - city2_info.humidity)|round(2)}}% GREATER than in {{city2_info.city}}.
+        {% else %}
+            The humidity in {{city1_info.city}} is {{(city2_info.humidity - city1_info.humidity)|round(2)}}% LESS than in {{city2_info.city}}.
+        {% endif %} 
+    </p>
+
+    <p>   
+        {% if city1_info.wind_speed > city2_info.wind_speed %}
+            The wind speed in {{city1_info.city}} is {{(city1_info.wind_speed - city2_info.wind_speed)|round(2)}}
+            {% if units_letter == 'F' %}
+                km/hour
+            {% else %}
+                miles/hour
+            {% endif %}
+            GREATER than in {{city2_info.city}}.
+        {% else %}
+            The wind speed in {{city1_info.city}} is {{(city2_info.wind_speed - city1_info.wind_speed)|round(2)}}
+            {% if units_letter == 'F' %}
+                km/hour
+            {% else %}
+                miles/hour
+            {% endif %}
+            LESS than in {{city2_info.city}}.
+        {% endif %} 
+    </p>
+   
+    <p>   
+        {% if city1_info.sunset_hour > city2_info.sunset_hour %}
+            The sun sets in {{city1_info.city}} is {{(city1_info.sunset_hour - city2_info.sunset_hour)|round(2)}} hours EARLIER than in {{city2_info.city}}.
+        {% else %}
+            The sun sets in {{city1_info.city}} is {{(city2_info.sunset_hour - city1_info.sunset_hour)|round(2)}} hours LATER than in {{city2_info.city}}.
+        {% endif %} 
+    </p>    
+</section>
+
+{% endblock %}
